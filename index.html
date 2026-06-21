@@ -3,34 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой сайт на GitHub</title>
+    <title>CurseForge Style Portal</title>
     <style>
+        /* Базовые стили в стиле CurseForge */
         body {
-            background-color: #0d1117;
-            color: #58a6ff;
-            font-family: 'Segoe UI', sans-serif;
+            background-color: #141414;
+            color: #e2e8f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Навигационная панель (Шапка) */
+        header {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #1c1c1c;
+            border-bottom: 2px solid #2d2d2d;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #ff7a00; /* Фирменный оранжевый CurseForge */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: #ffffff;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-login {
+            background: none;
+            border: 1px solid #ff7a00;
+            color: #ff7a00;
+            padding: 8px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .btn-login:hover {
+            background-color: rgba(255, 122, 0, 0.1);
+        }
+
+        .btn-register {
+            background-color: #ff7a00;
+            border: none;
+            color: #fff;
+            padding: 9px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn-register:hover {
+            background-color: #e06b00;
+        }
+
+        /* Главный контейнер */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            border-left: 4px solid #ff7a00;
+            padding-left: 15px;
+            margin-bottom: 25px;
+            color: #ffffff;
+        }
+
+        /* Сетка карточек (Каталог) */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        /* Стиль карточки под CurseForge */
+        .card {
+            background-color: #1c1c1c;
+            border: 1px solid #2d2d2d;
+            border-radius: 6px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .card:hover {
+            border-color: #ff7a00;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 122, 0, 0.05);
+        }
+
+        .card-header {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        /* Заглушка для иконки мода */
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #2d2d2d;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #ff7a00;
+            border: 1px solid #3d3d3d;
+        }
+
+        .card-info h3 {
+            margin: 0 0 5px 0;
+            color: #ffffff;
+            font-size: 1.2rem;
+        }
+
+        .card-info .author {
+            font-size: 0.8rem;
+            color: #ff7a00;
+        }
+
+        .card p {
+            color: #a0aec0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 0 0 20px 0;
+        }
+
+        .download-btn {
+            display: block;
+            background-color: #2d2d2d;
+            border: 1px solid #3d3d3d;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .download-btn:hover {
+            background-color: #ff7a00;
+            border-color: #ff7a00;
+        }
+
+        /* Окна авторизации (Модалки) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            z-index: 1000;
         }
-        .card {
+
+        .modal-content {
+            background-color: #1c1c1c;
+            border: 1px solid #ff7a00;
+            padding: 30px;
+            border-radius: 6px;
+            width: 100%;
+            max-width: 360px;
+            position: relative;
+            box-shadow: 0 0 25px rgba(255, 122, 0, 0.2);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: #a0aec0;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .close-btn:hover { color: #fff; }
+
+        .modal-content h2 {
+            margin-top: 0;
+            color: #fff;
+            margin-bottom: 20px;
             text-align: center;
-            border: 1px solid #30363d;
-            padding: 40px;
-            border-radius: 12px;
-            background-color: #161b22;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
         }
-        h1 { color: #58a6ff; }
-        p { color: #8b949e; }
+
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: #141414;
+            border: 1px solid #2d2d2d;
+            color: #fff;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .modal-content input:focus {
+            border-color: #ff7a00;
+            outline: none;
+        }
+
+        .modal-submit {
+            width: 100%;
+            background-color: #ff7a00;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .modal-submit:hover { background-color: #e06b00; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>Сайт успешно запущен!</h1>
-        <p>Добро пожаловать на мою страницу.</p>
+
+    <!-- Шапка -->
+    <header>
+        <div class="logo">Forge<span>Portal</span></div>
+        <div class="auth-buttons">
+            <button class="btn-login" onclick="openModal('loginModal')">Войти</button>
+            <button class="btn-register" onclick="openModal('registerModal')">Регистрация</button>
+        </div>
+    </header>
+
+    <!-- Главный контент -->
+    <div class="container">
+        <div class="section-title">Трендовые моды и карты</div>
+        
+        <div class="grid">
+            <!-- Мод 1 -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <div class="card-icon">📦</div>
+                        <div class="card-info">
+                            <h3>Super Tech Mod</h3>
+                            <div class="author">От Создателя</div>
+                        </div>
+                    </div>
+                    <p>Добавляет в игру продвинутые механизмы, генераторы энергии, трубы и заводы автоматизации.</p>
+                </div>
+                <a href="mod.jar" download class="download-btn">Скачать (.jar)</a>
+            </div>
+
+            <!-- Карта 2 -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <div class="card-icon">🗺️</div>
+                        <div class="card-info">
+                            <h3>One Block Survival</h3>
+                            <div class="author">От Создателя</div>
+                        </div>
+                    </div>
+                    <p>Вы появляетесь на одном одиноком блоке в воздухе. Ломайте его, чтобы получать новые ресурсы!</p>
+                </div>
+                <a href="map.zip" download class="download-btn">Скачать (.zip)</a>
+            </div>
+
+            <!-- Мод 3 -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <div class="card-icon">⚔️</div>
+                        <div class="card-info">
+                            <h3>RPG Weapons</h3>
+                            <div class="author">От Создателя</div>
+                        </div>
+                    </div>
+                    <p>Огромный пак кастомного оружия с 3D-моделями, спецэффектами и уникальными механиками боя.</p>
+                </div>
+                <a href="weapons.jar" download class="download-btn">Скачать (.jar)</a>
+            </div>
+        </div>
     </div>
+
+    <!-- Модальное окно Входа -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Вход</h2>
+            <input type="text" placeholder="Логин или Email">
+            <input type="password" placeholder="Пароль">
+            <button class="modal-submit" onclick="alert('Вход выполнен (демо)!')">Войти</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно Регистрации -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('registerModal')">&times;</span>
+            <h2>Регистрация</h2>
+            <input type="text" placeholder="Придумайте логин">
+            <input type="email" placeholder="Ваш Email">
+            <input type="password" placeholder="Придумайте пароль">
+            <button class="modal-submit" onclick="alert('Вы успешно зарегистрировались (демо)!')">Создать аккаунт</button>
+        </div>
+    </div>
+
+    <!-- Скрипт для открытия/закрытия окон -->
+    <script>
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+        }
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+        // Закрытие окон при клике на темную область
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+
 </body>
 </html>
