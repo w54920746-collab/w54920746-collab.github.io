@@ -21,10 +21,16 @@
         .icon { font-size: 3.5rem; }
         h1 { margin: 0; color: #fff; }
         .description { font-size: 1.1rem; line-height: 1.6; color: #cbd5e1; margin: 20px 0; }
-        .table-title { color: #52b788; font-size: 1.3rem; font-weight: bold; margin-top: 30px; }
         
+        .install-instruction { margin-top: 25px; margin-bottom: 25px; }
+        .install-title { color: #a3e635; font-size: 1.15rem; font-weight: bold; margin-bottom: 10px; }
+        .install-list { margin: 0; padding-left: 20px; color: #cbd5e1; line-height: 1.6; }
+
+        .table-title { color: #a3e635; font-size: 1.15rem; font-weight: bold; margin-top: 30px; margin-bottom: 5px; }
+        .version-select-text { color: #8b949e; font-size: 0.85rem; margin-bottom: 15px; }
+
         /* Таблица версий */
-        .table-container { margin-top: 15px; background-color: #1a1a1a; border: 1px solid #2d2d2d; border-radius: 6px; overflow: hidden; }
+        .table-container { background-color: #1a1a1a; border: 1px solid #2d2d2d; border-radius: 6px; overflow: hidden; }
         table { width: 100%; border-collapse: collapse; text-align: left; }
         th { background-color: #262626; color: #8b949e; padding: 12px 15px; font-size: 0.8rem; text-transform: uppercase; }
         td { padding: 12px 15px; border-bottom: 1px solid #2d2d2d; }
@@ -46,16 +52,27 @@
         </div>
     </div>
 
-    <p class="description">Вы появляетесь на одиноком блоке in небе. Разрушайте его, получайте новые ресурсы, проходите разные фазы генерации и постройте свой собственный мир с нуля!</p>
+    <p class="description">Вы появляетесь на одиноком блоке в небе. Разрушайте его, получайте новые ресурсы, проходите разные фазы генерации и постройте свой собственный мир с нуля!</p>
 
-    <div class="table-title">Доступные версии для скачивания:</div>
+    <div class="install-instruction">
+        <div class="install-title">Как установить Один блок</div>
+        <ol class="install-list">
+            <li>Скачай карту</li>
+            <li>Распакуй файл в .minecraft\saves</li>
+            <li>Готово</li>
+        </ol>
+    </div>
+
+    <div class="table-title">Скачать Один блок</div>
+    <div class="version-select-text">Версии: <span style="color:#a3e635; font-weight:bold;">Все</span></div>
+
     <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th>Версия Майнкрафт</th>
+                    <th>Ссылка на скачивание</th>
                     <th>Размер</th>
-                    <th>Дата добавления</th>
+                    <th>Дата обновления</th>
                 </tr>
             </thead>
             <tbody>
@@ -67,6 +84,16 @@
                 <tr>
                     <td><a href="./OneBlock-1-16-5.zip" download class="dl-link">Для 1.16.5</a></td>
                     <td>1,41 МБ</td>
+                    <td class="date">12 ноября 2021</td>
+                </tr>
+                <tr>
+                    <td><a href="./OneBlock-1-16-4.zip" download class="dl-link">Для 1.16.4</a></td>
+                    <td>1,38 МБ</td>
+                    <td class="date">12 ноября 2021</td>
+                </tr>
+                <tr>
+                    <td><a href="./OneBlock-1-15-2.zip" download class="dl-link">Для 1.15.2</a></td>
+                    <td>1,06 МБ</td>
                     <td class="date">12 ноября 2021</td>
                 </tr>
             </tbody>
